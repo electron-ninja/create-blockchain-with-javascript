@@ -1,4 +1,4 @@
-import SHA256 from "crypto-js/sha256";
+const SHA256 = require("crypto-js/sha256");
 
 class Transaction{
     constructor(fromAddress, toAddress, amount) {
@@ -123,5 +123,5 @@ wilsonCoin.minePendingTransactions('wilson-address')
 
 console.log('Balance of the wilson address is: ', wilsonCoin.getBalanceOfAddress('wilson-address'))
 /*
-    The mining reward from the second minePendingTransactions is in the pendingTransaction
+    The mining reward from the second minePendingTransactions is in the pendingTransaction and will
  */
