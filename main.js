@@ -1,4 +1,4 @@
-const SHA256 = require('crypto-js/sha256');
+import SHA256 from "crypto-js/sha256";
 
 class Transaction{
     constructor(fromAddress, toAddress, amount) {
@@ -14,6 +14,7 @@ class Block{
         this.transations = transations;
         this.previousHash = previousHash;
         this.hash = this.calculateHash();
+        // The nonce variable enables repeated hashing in mineBlock()
         this.nonce = 0;
     }
 
@@ -22,6 +23,7 @@ class Block{
     }
 
     mineBlock(difficulty){
+        // added difficulty to inplement the proof-of-work feature in a peer-to-peer system
         while(this.hash.substring(0, difficulty) != Array(difficulty + 1).join('0')){
             this.nonce += 1;
             this.hash = this.calculateHash()
@@ -109,11 +111,17 @@ console.log('Start the miner...\n')
 
 wilsonCoin.minePendingTransactions('wilson-address')
 
+/*
+    After the first minePendingTransaction, the miningReward will be in the pendingTransaction,
+    We need to run the miner one more time to show the preivous balance.
+*/
 console.log('Balance of the wilson address is: ', wilsonCoin.getBalanceOfAddress('wilson-address'))
-
 
 console.log('Start the miner again...\n')
 
 wilsonCoin.minePendingTransactions('wilson-address')
 
 console.log('Balance of the wilson address is: ', wilsonCoin.getBalanceOfAddress('wilson-address'))
+/*
+    The mining reward from the second minePendingTransactions is in the pendingTransaction
+ */
